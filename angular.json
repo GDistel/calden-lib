@@ -123,6 +123,46 @@
           }
         }
       }
+    },
+    "calden-lib": {
+      "projectType": "library",
+      "root": "projects/calden-lib",
+      "sourceRoot": "projects/calden-lib/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/calden-lib/tsconfig.lib.json",
+            "project": "projects/calden-lib/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/calden-lib/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/calden-lib/src/test.ts",
+            "tsConfig": "projects/calden-lib/tsconfig.spec.json",
+            "karmaConfig": "projects/calden-lib/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/calden-lib/tsconfig.lib.json",
+              "projects/calden-lib/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }},
   "defaultProject": "calden"
 }
