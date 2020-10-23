@@ -1,0 +1,69 @@
+.login-form-container {
+  min-width: 240px;
+  max-width: 360px;
+  width: 90%;
+  padding-bottom: 32px;
+  padding-top: 32px;
+  background-color: white;
+}
+
+.logo-container > img {
+  width: 136px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 16px;
+}
+
+.form-container, .sub-container {
+  margin-left: 32px;
+  margin-right: 32px;
+}
+
+.buttons-container {
+  margin-bottom: 16px;
+}
+
+.login-btn {
+  max-width: 240px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.further-options {
+  margin-top: 16px;
+}
+
+.context-switch-link {
+  width: 100%;
+  text-align: center;
+}
+
+.confirm-registration {
+  margin-bottom: 16px;
+  width: 90%;
+  text-align: center;
+}
+
+mat-form-field {
+  margin-bottom: 16px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.gray-txt { color: gray; }
+
+.small-txt {
+  font-size: 12px;
+  @extend .gray-txt;
+}
+
+.pointer { cursor: pointer; }
+
+.invalid-credentials {
+  text-align: center;
+  width: 100%;
+  color: red;
+}

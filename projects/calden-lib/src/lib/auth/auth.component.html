@@ -1,0 +1,52 @@
+<div class="login-form-container mat-elevation-z12">
+  <div class="logo-container">
+    <img [src]="logo" alt="logo">
+  </div>
+
+  <div *ngIf="!isLoading && !confirmSignup" class="form-container" fxLayout="column" fxLayoutGap="8px">
+    <p *ngIf="invalidCredentials" class="invalid-credentials">Invalid login credentials</p>
+    <form [formGroup]="form" novalidate>
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Username" required formControlName="username">
+        <mat-error>Not a valid username format. {{validUserMessage}}</mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input matInput type="password" placeholder="Password" formControlName="password" required>
+        <mat-error *ngIf="context === 'sign up'">
+          Must be at least {{minPasswordLength}} characters long
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field *ngIf="context === 'sign up'" class="full-width">
+        <input matInput type="password" placeholder="Re-type password" formControlName="confirmPassword" required
+          [errorStateMatcher]="equalPasswordsMatcher">
+        <mat-error *ngIf="context === 'sign up'">
+          The passwords do not match
+        </mat-error>
+      </mat-form-field>
+    </form>
+    <button mat-raised-button color="primary" class="full-width login-btn" (click)="onMainContextAction()">
+      {{ context | uppercase }}
+    </button>
+    <div class="context-switch-link gray-txt pointer" (click)="onSwitchContext()">
+      Or <b>click here</b> to {{ context === 'sign up' ? 'login' : 'sign up' }}
+    </div>
+    <div *ngIf="isLoginContext()" fxLayout="row wrap" fxLayoutAlign="space-between center" class="further-options">
+      <mat-checkbox color="primary" class="small-txt" [(ngModel)]="rememberMe">Remember me</mat-checkbox>
+      <a (click)="onForgotPassword()" class="small-txt pointer">Forgot your password?</a>
+    </div>
+  </div>
+
+  <div *ngIf="confirmSignup" fxLayout="column" fxLayoutAlign="center center" class="sub-container">
+    <h4 class="confirm-registration">
+      Please, click on the link sent to your email to finish your registration
+    </h4>
+    <button mat-stroked-button color="primary" (click)="onSwitchContext()">BACK TO LOGIN</button>
+  </div>
+
+  <div *ngIf="isLoading" fxLayout="column" fxLayoutAlign="center center">
+    <mat-spinner diameter="50"></mat-spinner>
+  </div>
+
+</div>
+
+

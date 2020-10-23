@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'lib-calden-lib',
+  selector: 'calden-dummy',
   template: `
     <p>
       calden-lib works!!!

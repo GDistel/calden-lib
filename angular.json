@@ -28,6 +28,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -92,6 +93,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -128,7 +130,7 @@
       "projectType": "library",
       "root": "projects/calden-lib",
       "sourceRoot": "projects/calden-lib/src",
-      "prefix": "lib",
+      "prefix": "calden",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
@@ -163,6 +165,7 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "calden"
 }
