@@ -1,24 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { AuthDumbComponent } from './auth-dumb.component';
 import { CaldenAuthModule } from 'projects/calden-lib/src/public-api';
 import { SharedModule } from '../shared.module';
-import { AuthComponent } from './auth.component';
 
 @NgModule({
   declarations: [
-    AuthComponent
+    AuthDumbComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild([
       {
         path: '',
-        component: AuthComponent
+        component: AuthDumbComponent
       }
     ]),
     SharedModule,
     CaldenAuthModule
   ],
 })
-export class AuthModule { }
+export class AuthDumbModule { }
