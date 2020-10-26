@@ -27,6 +27,6 @@ export class AuthenticationService {
   logout(): void {
     this.credentialsService.setCredentials(null);
     this.credentialsService.stopRefreshTokenTimer();
-    this.router.navigate(['/login']);
+    this.router.navigate(['/']);
   }
 }

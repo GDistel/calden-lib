@@ -17,15 +17,28 @@
     <h3>Result</h3>
     <hr><br>
 
-    <p *ngIf="authenticated" class="success-auth">You have successfully authenticated</p>
+    <ng-container *ngIf="authenticated">
+      <p class="success-auth">You have successfully authenticated</p>
+      <button mat-raised-button color="primary" (click)="logout()">LOGOUT</button>
+    </ng-container>
+
+    <p *ngIf="noSignups">
+      <span class="highlight">NO </span>signups accepted for the moment.
+      <mat-icon inline class="highlight pointer" (click)="noSignups = false">close</mat-icon>
+    </p>
     <ng-container *ngIf="!authenticated">
-      <p>You are currently <span class="highlight">NOT</span> authenticated</p>
-      <p>Try to login with:</p>
+      <p>You are currently <span class="highlight">NOT</span> authenticated.</p>
+      <p>Login with:</p>
       <ul>
         <li>username: <i>testnovas</i></li>
         <li>password: <i>Itest1111</i></li>
       </ul>
+      <p><i>NOTE: The server is running on Heroku's free tier, so may take a few seconds to wake up.</i></p>
     </ng-container>
+    <br><br>
+    <button mat-raised-button color="accent" routerLink="auth-success">
+      CLICK ME TO TRY TO ACCESS A PROTECTED ROUTE
+    </button>
 
 
 </div>

@@ -7,7 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   exports: [
@@ -17,7 +17,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatIconModule
   ]
 })
 export class SharedModule { }
