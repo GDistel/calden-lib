@@ -33,11 +33,14 @@
         <li>username: <i>testnovas</i></li>
         <li>password: <i>Itest1111</i></li>
       </ul>
-      <p><i>NOTE: The server is running on Heroku's free tier, so may take a few seconds to wake up.</i></p>
+      <p><i>NOTE: The server is running on Heroku's free tier, so it may take a few seconds to wake up.</i></p>
     </ng-container>
     <br><br>
-    <button mat-raised-button color="accent" routerLink="auth-success">
-      CLICK ME TO TRY TO ACCESS A PROTECTED ROUTE
+    <button *ngIf="!authenticated" mat-raised-button color="accent" routerLink="auth-success">
+      <mat-icon inline>lock</mat-icon> AUTH-PROTECTED ROUTE (TRY ME)
+    </button>
+    <button *ngIf="authenticated" mat-raised-button color="accent" routerLink="auth-success">
+      <mat-icon inline>lock_open</mat-icon> AUTH-ACCESSIBLE ROUTE (TRY ME)
     </button>
 
 
