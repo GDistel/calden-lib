@@ -5,7 +5,8 @@ import { tap } from 'rxjs/operators';
 
 import { CredentialsService } from './credentials.service';
 import { AuthApiService } from './auth-api.service';
-import { Credentials, AuthRequest } from 'projects/calden-lib/src/lib/auth';
+import { Credentials, AuthRequest } from './auth.interfaces';
+import { CaldenAuthConfig } from './auth.config';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,8 @@ export class AuthenticationService {
   constructor(
     private router: Router,
     private authApiSvc: AuthApiService,
-    private credentialsService: CredentialsService
+    private credentialsService: CredentialsService,
+    private authConfig: CaldenAuthConfig
   ) {}
 
   login(authRequest: AuthRequest): Observable<Credentials> {
@@ -27,6 +29,6 @@ export class AuthenticationService {
   logout(): void {
     this.credentialsService.setCredentials(null);
     this.credentialsService.stopRefreshTokenTimer();
-    this.router.navigate(['/']);
+    this.router.navigate([this.authConfig.urls.logoutRedirect]);
   }
 }

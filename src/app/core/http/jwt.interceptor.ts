@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { CredentialsService } from '../../auth/credentials.service';
+import { CredentialsService } from 'projects/calden-lib/src/lib/auth';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

@@ -11,4 +11,11 @@ export interface AuthRequest{
   remember: boolean;
 }
 
+export interface AuthConfigUrls {
+  token: string;
+  refreshToken: string;
+  logoutRedirect: string;
+  authGuardRedirect: string;
+}
+
 export type AuthContextType = 'login' | 'sign up';

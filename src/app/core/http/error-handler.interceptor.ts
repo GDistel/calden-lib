@@ -3,8 +3,8 @@ import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpErrorResponse
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { AuthenticationService } from '../../auth/authentication.service';
-import { CredentialsService } from '../../auth/credentials.service';
+import { AuthenticationService } from 'projects/calden-lib/src/lib/auth';
+import { CredentialsService } from 'projects/calden-lib/src/lib/auth';
 
 @Injectable()
 export class ErrorHandlerInterceptor implements HttpInterceptor {

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Credentials } from 'projects/calden-lib/src/lib/auth';
+import { Credentials } from './auth.interfaces';
 import { AuthApiService } from './auth-api.service';
 import { take } from 'rxjs/operators';
 

@@ -8,6 +8,16 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { CaldenAuthConfig } from './auth.config';
+
+const authConfig = {
+  urls: {
+    token: 'token/',
+    refreshToken: 'token/refresh/',
+    logoutRedirect: '',
+    authGuardRedirect: ''
+  }
+};
 
 @NgModule({
   declarations: [CaldenAuthComponent],
@@ -22,6 +32,12 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatInputModule,
     FlexLayoutModule
   ],
-  exports: [CaldenAuthComponent]
+  exports: [CaldenAuthComponent],
+  providers: [
+    {
+      provide: CaldenAuthConfig,
+      useValue: authConfig
+    }
+  ]
 })
 export class CaldenAuthModule { }

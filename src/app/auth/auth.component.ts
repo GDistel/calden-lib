@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthRequest } from 'projects/calden-lib/src/lib/auth';
-import { AuthenticationService } from './authentication.service';
-import { CredentialsService } from './credentials.service';
+import { AuthenticationService } from 'projects/calden-lib/src/lib/auth';
+import { CredentialsService } from 'projects/calden-lib/src/lib/auth';
 import { untilDestroyed } from '../core/until-destroyed';
 import { finalize } from 'rxjs/operators';
 

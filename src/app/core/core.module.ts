@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { ApiPrefixInterceptor } from './http/api-prefix.interceptor';
 import { JwtInterceptor } from './http/jwt.interceptor';
 import { ErrorHandlerInterceptor } from './http/error-handler.interceptor';
-import { CredentialsService } from '../auth/credentials.service';
+import { CredentialsService } from 'projects/calden-lib/src/lib/auth';
 import { appInitializer } from './app.initializer';
 
 @NgModule({

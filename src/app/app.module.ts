@@ -9,6 +9,16 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CaldenAuthConfig } from 'projects/calden-lib/src/lib/auth/auth.config';
+
+const caldenAuthConfig = {
+  urls: {
+    token: 'token/',
+    refreshToken: 'token/refresh/',
+    authGuardRedirect: '/auth-async',
+    logoutRedirect: ''
+  }
+};
 
 @NgModule({
   declarations: [
@@ -24,7 +34,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatListModule,
     MatButtonModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: CaldenAuthConfig,
+      useValue: caldenAuthConfig
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

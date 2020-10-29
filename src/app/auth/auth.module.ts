@@ -5,7 +5,7 @@ import { CaldenAuthModule } from 'projects/calden-lib/src/public-api';
 import { SharedModule } from '../shared.module';
 import { AuthComponent } from './auth.component';
 import { AuthSuccessComponent } from './auth-success.component';
-import { AuthenticationGuard } from './authentication.guard';
+import { AuthenticationGuard } from 'projects/calden-lib/src/lib/auth';
 
 @NgModule({
   declarations: [

@@ -1,4 +1,4 @@
-import { CredentialsService } from '../auth/credentials.service';
+import { CredentialsService } from 'projects/calden-lib/src/lib/auth';
 
 export function appInitializer(credentialsSvc: CredentialsService): any {
     return () => {
