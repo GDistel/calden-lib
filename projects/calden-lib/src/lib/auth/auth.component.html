@@ -40,7 +40,9 @@
     <h4 class="confirm-registration">
       Please, click on the link sent to your email to finish your registration
     </h4>
-    <button mat-stroked-button color="primary" (click)="onSwitchContext()">BACK TO LOGIN</button>
+    <button mat-stroked-button color="primary" class="back-to-login-btn" (click)="onSwitchContext()">
+      BACK TO LOGIN
+    </button>
   </div>
 
   <div *ngIf="isLoading" fxLayout="column" fxLayoutAlign="center center">

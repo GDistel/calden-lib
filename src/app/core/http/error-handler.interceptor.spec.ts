@@ -2,7 +2,7 @@ import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
-import { environment } from '@env/environment';
+import { environment } from 'src/environments/environment';
 
 import { ErrorHandlerInterceptor } from './error-handler.interceptor';
 
@@ -14,7 +14,7 @@ describe('ErrorHandlerInterceptor', () => {
   const credentialsSvc = jasmine.createSpyObj('credentialsSvc', {credentials: false});
   const errorHandler = jasmine.createSpyObj('errorHandlerInterceptor', ['errorHandler']);
 
-  function createInterceptor() {
+  function createInterceptor(): ErrorHandlerInterceptor {
     errorHandlerInterceptor = new ErrorHandlerInterceptor(authenticationSvc, credentialsSvc);
     return errorHandlerInterceptor;
   }
