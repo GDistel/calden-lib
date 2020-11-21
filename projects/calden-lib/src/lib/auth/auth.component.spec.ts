@@ -1,3 +1,4 @@
+import { AuthRequest } from './../../../../../dist/calden-lib/src/lib/auth/auth.interfaces.d';
 import { ComponentFixture, fakeAsync, flush, TestBed, waitForAsync } from '@angular/core/testing';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
@@ -76,7 +77,7 @@ describe('Test CaldenAuthComponent', () => {
       expect(password.valid).toBeTrue();
     });
 
-    it('should adjust the password validity rules according to the input data - no errors', () => {
+    it('should adjust the password validity rules according to component input data', () => {
       component.context = 'sign up';
       component.minPasswordLength = 4;
       fixture.detectChanges();
@@ -91,7 +92,7 @@ describe('Test CaldenAuthComponent', () => {
       expect(passLengthHint).toBeFalsy();
     });
 
-    it('should adjust the password validity rules according to the input data - errors', () => {
+    it('should error if the password length inputed by the user does not respect the validation rule', () => {
       component.context = 'sign up';
       component.minPasswordLength = 4;
       fixture.detectChanges();
@@ -104,6 +105,84 @@ describe('Test CaldenAuthComponent', () => {
       fixture.detectChanges();
       const passLengthHint = el.query(By.css('mat-error'));
       expect(passLengthHint.nativeElement.innerText).toEqual('Must be at least 4 characters long');
+    });
+
+    it('should properly handle the default validity rules for the username control', () => {
+      component.context = 'sign up';
+      fixture.detectChanges();
+      const username = component.form.controls.username;
+
+      expect(username.valid).toBeFalse();
+      expect(username.errors.required).toBeTrue();
+
+      username.setValue('johnATcompany.com');
+      expect(username.valid).toBeFalse();
+      expect(username.errors.pattern).toEqual({requiredPattern: '^[^ @]+@[^ @]+$', actualValue: 'johnATcompany.com'});
+
+      component.form.controls.username.markAsTouched();
+      fixture.detectChanges();
+      const usernameLengthHint = el.query(By.css('mat-error'));
+      expect(usernameLengthHint.nativeElement.innerText).toContain('Not a valid username format');
+
+      username.setValue('john@company.com');
+      expect(username.valid).toBeTrue();
+    });
+
+    it('should adjust the username validity rules according to component input data', () => {
+      component.context = 'sign up';
+      component.usernameValidPattern = '';
+      fixture.detectChanges();
+      const username = component.form.controls.username;
+
+      username.setValue('abcd');
+      expect(username.valid).toBeTrue();
+
+      component.form.controls.username.markAsTouched();
+      fixture.detectChanges();
+      const usernameLengthHint = el.query(By.css('mat-error'));
+      expect(usernameLengthHint).toBeFalsy();
+    });
+
+    it('should show invalid credentials according to component input data', () => {
+      let invalidCredentialsMessage: DebugElement;
+      invalidCredentialsMessage = el.query(By.css('.invalid-credentials'));
+      expect(invalidCredentialsMessage).toBeFalsy();
+
+      component.invalidCredentials = true;
+      fixture.detectChanges();
+      invalidCredentialsMessage = el.query(By.css('.invalid-credentials'));
+      expect(invalidCredentialsMessage).toBeTruthy();
+    });
+
+    it('should emit the "forgot password" event', () => {
+      component.forgotPassword.subscribe((ev: void) => expect(ev).toBeUndefined());
+      fixture.detectChanges();
+      const forgotPasswordLink = el.query(By.css('.further-options > a'));
+      forgotPasswordLink.nativeElement.click();
+    });
+
+    it('should emit the auth request event upon login request', () => {
+      const expectedAuthRequest = {
+        context: 'login',
+        username: 'john',
+        password: 'abc1234',
+        remember: false
+      };
+      component.authRequest.subscribe((req: AuthRequest) => {
+        expect(req).toBeTruthy();
+        expect((req as any)).toEqual(expectedAuthRequest);
+      });
+      fixture.detectChanges();
+      const username = component.form.controls.username;
+      username.setValue('john');
+      component.form.controls.username.markAsTouched();
+
+      const password = component.form.controls.password;
+      password.setValue('abc1234');
+      component.form.controls.password.markAsTouched();
+
+      const loginBtn = el.query(By.css('.login-btn'));
+      loginBtn.nativeElement.click();
     });
 
 });
