@@ -1,14 +1,13 @@
-import { AuthRequest } from './../../../../../dist/calden-lib/src/lib/auth/auth.interfaces.d';
 import { ComponentFixture, fakeAsync, flush, TestBed, waitForAsync } from '@angular/core/testing';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { CaldenAuthModule } from './auth.module';
 import { CaldenAuthComponent } from './auth.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { ValidationErrors } from '@angular/forms';
+import { AuthContextType, AuthRequest } from './auth.interfaces';
 
 
-describe('Test CaldenAuthComponent', () => {
+describe('CaldenAuthComponent', () => {
 
     let component: CaldenAuthComponent;
     let fixture: ComponentFixture<CaldenAuthComponent>;
@@ -183,6 +182,95 @@ describe('Test CaldenAuthComponent', () => {
 
       const loginBtn = el.query(By.css('.login-btn'));
       loginBtn.nativeElement.click();
+    });
+
+    it('should go back to the login context if it is in the confirm sign up context', () => {
+      component.contextSwitch.subscribe((context: AuthContextType) => {
+        expect(context).toBeTruthy();
+        expect((context as any)).toEqual('login');
+      });
+      component.confirmSignup = true;
+      fixture.detectChanges();
+
+      const backToLoginBtn = el.query(By.css('.back-to-login-btn'));
+      backToLoginBtn.nativeElement.click();
+    });
+
+    it('should switch from the login context to the sign up context', () => {
+      component.contextSwitch.subscribe((context: AuthContextType) => {
+        expect(context).toBeTruthy();
+        expect((context as any)).toEqual('sign up');
+      });
+      fixture.detectChanges();
+
+      const contextSwitchLink = el.query(By.css('.context-switch-link'));
+      contextSwitchLink.nativeElement.click();
+    });
+
+    it('should switch from the sign up context to the login context', () => {
+      component.contextSwitch.subscribe((context: AuthContextType) => {
+        expect(context).toBeTruthy();
+        expect((context as any)).toEqual('login');
+      });
+      component.context = 'sign up';
+
+      fixture.detectChanges();
+      const contextSwitchLink = el.query(By.css('.context-switch-link'));
+      contextSwitchLink.nativeElement.click();
+    });
+
+    it('should emit an auth request for sign up', () => {
+      const expectedAuthRequest = {
+        context: 'sign up',
+        username: 'john@company.com',
+        password: 'abcd1234',
+        remember: false
+      };
+      component.authRequest.subscribe((req: AuthRequest) => {
+        expect(req).toBeTruthy();
+        expect((req as any)).toEqual(expectedAuthRequest);
+      });
+      component.context = 'sign up';
+      fixture.detectChanges();
+
+      const username = component.form.controls.username;
+      username.setValue('john@company.com');
+      component.form.controls.username.markAsTouched();
+
+      const password = component.form.controls.password;
+      password.setValue('abcd1234');
+      component.form.controls.password.markAsTouched();
+
+      const confirmPassword = component.form.controls.confirmPassword;
+      confirmPassword.setValue('abcd1234');
+      component.form.controls.confirmPassword.markAsTouched();
+
+      const loginBtn = el.query(By.css('.login-btn'));
+      loginBtn.nativeElement.click();
+    });
+
+    it('should not send an auth request for sign up if the password and confirm password field do not match', () => {
+      component.authRequest.subscribe((req: AuthRequest) => fail('Should not have emitted an auth request'));
+      fixture.detectChanges();
+      const contextSwitchLink = el.query(By.css('.context-switch-link'));
+      contextSwitchLink.nativeElement.click();
+
+      const username = component.form.controls.username;
+      username.setValue('john');
+      component.form.controls.username.markAsTouched();
+
+      const password = component.form.controls.password;
+      password.setValue('abcd1234');
+      component.form.controls.password.markAsTouched();
+
+      const confirmPassword = component.form.controls.confirmPassword;
+      confirmPassword.setValue('defg5678');
+      component.form.controls.confirmPassword.markAsTouched();
+
+      fixture.detectChanges();
+      const loginBtn = el.query(By.css('.login-btn'));
+      loginBtn.nativeElement.click();
+      expect(component.form.valid).toBeFalse();
     });
 
 });
