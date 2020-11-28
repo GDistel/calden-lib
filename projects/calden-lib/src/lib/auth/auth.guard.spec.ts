@@ -4,15 +4,7 @@ import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/ro
 import { CredentialsService } from './credentials.service';
 import { AuthenticationGuard } from './auth.guard';
 import { CaldenAuthConfig } from './auth.config';
-
-const mockAuthConfig: CaldenAuthConfig = {
-  urls: {
-    token: 'token/',
-    refreshToken: 'token/refresh/',
-    authGuardRedirect: '/auth-async',
-    logoutRedirect: ''
-  }
-};
+import { mockAuthConfig } from './auth.config.mock';
 
 describe('AuthenticationGuard', () => {
   let authenticationGuard: AuthenticationGuard;

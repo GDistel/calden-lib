@@ -12,12 +12,13 @@ import { CaldenAuthConfig } from './auth.config';
   providedIn: 'root',
 })
 export class AuthenticationService {
+
   constructor(
     private router: Router,
     private authApiSvc: AuthApiService,
     private credentialsService: CredentialsService,
     private authConfig: CaldenAuthConfig
-  ) {}
+  ) { }
 
   login(authRequest: AuthRequest): Observable<Credentials> {
     const loginObservable = this.authApiSvc.getTokens(authRequest).pipe(tap({
@@ -31,4 +32,5 @@ export class AuthenticationService {
     this.credentialsService.stopRefreshTokenTimer();
     this.router.navigate([this.authConfig.urls.logoutRedirect]);
   }
+
 }
