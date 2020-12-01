@@ -3,7 +3,7 @@ import { Credentials } from './auth.interfaces';
 import { AuthApiService } from './auth-api.service';
 import { take } from 'rxjs/operators';
 
-const credentialsKey = 'credentials';
+export const credentialsKey = 'credentials';
 
 @Injectable({
   providedIn: 'root',
